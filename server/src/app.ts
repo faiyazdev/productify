@@ -3,6 +3,8 @@ import cors from "cors";
 import { env } from "./config/env.js";
 import { clerkMiddleware } from "@clerk/express";
 import clerkRoutes from "./routes/clerk.routes.js";
+import type { Request, Response } from "express";
+
 const app = express();
 
 // middlewares
@@ -18,11 +20,7 @@ app.use(
 // routes
 
 app.use("/api/webhooks", clerkRoutes);
-
-app.get("/", (_, res) => {
-  res.send("Home page!");
-});
-app.get("/:id", (req, res) => {
+app.get("/:id", (req: Request, res: Response) => {
   const { id } = req.params;
   res.json({ message: id });
 });
