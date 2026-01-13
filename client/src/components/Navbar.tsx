@@ -40,9 +40,11 @@ function Navbar() {
             </>
           ) : (
             <>
-              <SignInButton mode="modal">
-                <button className="btn btn-ghost btn-sm">Sign In</button>
-              </SignInButton>
+              <div className="hidden sm:block">
+                <SignInButton mode="modal">
+                  <button className="btn btn-ghost btn-sm">Sign In</button>
+                </SignInButton>
+              </div>
               <SignUpButton mode="modal">
                 <button className="btn btn-primary btn-sm">Get Started</button>
               </SignUpButton>
