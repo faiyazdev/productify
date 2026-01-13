@@ -1,32 +1,16 @@
-import { useEffect, useState } from "react";
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from "@clerk/clerk-react";
-function App() {
-  const [data, setData] = useState("");
-  useEffect(() => {
-    const res = fetch(`${import.meta.env.VITE_BACKEND_URL}/12345`);
-    res.then((response) => {
-      response.json().then((data) => {
-        setData(data.message);
-      });
-    });
-  }, []);
+import Navbar from "./components/Navbar";
+import { Route, Routes } from "react-router";
+import HomePage from "./pages/HomePage";
 
+function App() {
   return (
-    <div>
-      {data}
-      <header>
-        <SignedOut>
-          <SignInButton />
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
-      </header>
+    <div className="min-h-screen bg-base-100">
+      <Navbar />
+      <main className="max-w-6xl mx-auto px-4 py-6">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </main>
     </div>
   );
 }
