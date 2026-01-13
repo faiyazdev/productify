@@ -7,7 +7,7 @@ function HomePage() {
 
   return (
     // Changed mb-5 to pb-10 to ensure space at the very bottom of the page
-    <div className="py-5 lg:pb-10">
+    <div className=" lg:pb-10">
       {/* HERO SECTION */}
       <div className="hero bg-linear-to-br from-base-300 via-base-200 to-base-300 rounded-box overflow-hidden ">
         <div className="hero-content flex-col lg:flex-row-reverse gap-20 py-10">
@@ -37,15 +37,15 @@ function HomePage() {
       </div>
 
       {/* PRODUCTS SECTION - Added mt-10 for separation from Hero */}
-      <div className="mt-5">
-        <h2 className="text-xl font-bold flex items-center gap-2 mb-6">
+      <div className="mt-3">
+        <h2 className="text-xl font-bold flex items-center gap-2 mb-4">
           <PackageIcon className="size-5 text-primary" />
           All Products
         </h2>
 
         {products?.length === 0 ? (
           <div className="card bg-base-300">
-            <div className="card-body items-center text-center py-16">
+            <div className="card-body items-center text-center py-14">
               <PackageIcon className="size-16 text-base-content/20" />
               <h3 className="card-title text-base-content/50">
                 No products yet
