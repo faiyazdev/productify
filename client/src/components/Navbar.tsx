@@ -13,7 +13,7 @@ function Navbar() {
 
   return (
     <div className="navbar bg-base-300">
-      <div className="max-w-6xl mx-auto w-full px-4 flex justify-between items-center">
+      <div className="max-w-6xl mx-auto w-ful flex justify-between items-center">
         {/* LOGO - LEFT SIDE */}
         <div className="flex-1">
           <Link to="/" className="btn btn-ghost gap-2">
@@ -24,7 +24,7 @@ function Navbar() {
           </Link>
         </div>
 
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-center pr-2">
           <ThemeSelector />
           {isSignedIn ? (
             <>
