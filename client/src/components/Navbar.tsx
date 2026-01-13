@@ -13,16 +13,16 @@ function Navbar() {
 
   return (
     <div className="navbar bg-base-300">
-      <div className="max-w-6xl mx-auto w-full px-4 flex justify-between items-center">
+      <div className="max-w-6xl mx-auto w-full px-2 flex justify-between items-center">
         {/* LOGO - LEFT SIDE */}
-        <div className="flex-1">
-          <Link to="/" className="btn btn-ghost gap-2">
-            <ShoppingBagIcon className="size-5 text-primary" />
-            <span className="text-lg font-bold font-mono uppercase tracking-wider">
-              Productify
-            </span>
-          </Link>
-        </div>
+        {/* <div className=""> */}
+        <Link to="/" className="btn btn-ghost gap-2 px-0">
+          <ShoppingBagIcon className="size-5 text-primary" />
+          <span className="text-lg font-bold font-mono uppercase tracking-wider">
+            Productify
+          </span>
+        </Link>
+        {/* </div> */}
 
         <div className="flex gap-2 items-center">
           <ThemeSelector />
@@ -46,7 +46,7 @@ function Navbar() {
                 </SignInButton>
               </div>
               <SignUpButton mode="modal">
-                <button className="btn btn-primary btn-sm">Get Started</button>
+                <button className="btn btn-outline btn-sm">Get Started</button>
               </SignUpButton>
             </>
           )}
