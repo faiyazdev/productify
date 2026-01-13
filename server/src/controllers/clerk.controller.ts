@@ -4,7 +4,7 @@ import { verifyWebhook } from "@clerk/express/webhooks";
 const handleClerkWebhook = async (req: Request, res: Response) => {
   try {
     const evt = await verifyWebhook(req);
-
+    console.log("hello");
     console.log("Webhook payload:", evt.data);
 
     return res.send("Webhook received");
