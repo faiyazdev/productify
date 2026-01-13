@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/clerk-react";
 function App() {
   const [data, setData] = useState("");
   useEffect(() => {
@@ -11,7 +16,19 @@ function App() {
     });
   }, []);
 
-  return <div>{data}</div>;
+  return (
+    <div>
+      {data}
+      <header>
+        <SignedOut>
+          <SignInButton />
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+      </header>
+    </div>
+  );
 }
 
 export default App;
