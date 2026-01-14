@@ -27,8 +27,8 @@ export const deleteUser = async (clerkId: string) => {
   const [deletedUser] = await db
     .update(UsersTable)
     .set({
-      email: "deleted@email.com",
-      clerkId: `deleted-clerkUserId-${clerkId}`,
+      id: undefined,
+      email: `deleted-${Date.now()}@example.com`,
       name: "deleted name",
       imageUrl: "delted image path",
       deletedAt: new Date(),
@@ -47,10 +47,8 @@ export const upsertUser = async (data: typeof UsersTable.$inferInsert) => {
       target: UsersTable.clerkId,
       set: {
         email: data.email,
-        id: data.id,
-        clerkId: data.clerkId,
         name: data.name,
-        role: "user",
+        role: data.role,
         imageUrl: data.imageUrl,
       },
     })

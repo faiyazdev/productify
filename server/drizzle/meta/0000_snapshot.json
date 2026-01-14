@@ -1,5 +1,5 @@
 {
-  "id": "b7c94d2f-0af0-457d-ab06-47ebbb719449",
+  "id": "9e9840bf-f42e-40c5-9c90-0ff35859dcda",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -15,8 +15,8 @@
           "notNull": true,
           "default": "gen_random_uuid()"
         },
-        "clerkId": {
-          "name": "clerkId",
+        "clerk_id": {
+          "name": "clerk_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -41,28 +41,28 @@
           "primaryKey": false,
           "notNull": false
         },
-        "imageUrl": {
-          "name": "imageUrl",
+        "image_url": {
+          "name": "image_url",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "createdAt": {
-          "name": "createdAt",
+        "created_at": {
+          "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
         },
-        "updatedAt": {
-          "name": "updatedAt",
+        "updated_at": {
+          "name": "updated_at",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
         },
-        "deletedAt": {
-          "name": "deletedAt",
+        "deleted_at": {
+          "name": "deleted_at",
           "type": "timestamp",
           "primaryKey": false,
           "notNull": false
@@ -72,11 +72,11 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "users_clerkId_unique": {
-          "name": "users_clerkId_unique",
+        "users_clerk_id_unique": {
+          "name": "users_clerk_id_unique",
           "nullsNotDistinct": false,
           "columns": [
-            "clerkId"
+            "clerk_id"
           ]
         },
         "users_email_unique": {
