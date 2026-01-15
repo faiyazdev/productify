@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
-import db from "../index.js";
-import { UsersTable } from "../schema/users.js";
+import { UsersTable } from "../db/schema.js";
+import db from "../db/index.js";
 
 export const insertUser = async (data: typeof UsersTable.$inferInsert) => {
   const [user] = await db.insert(UsersTable).values(data).returning();

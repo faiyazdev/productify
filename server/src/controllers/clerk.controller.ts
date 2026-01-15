@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { verifyWebhook } from "@clerk/express/webhooks";
-import { deleteUser, upsertUser } from "../db/queries/user.query.js";
-import { syncClerkMetaData } from "../services/clerk.js";
+import { deleteUser, upsertUser } from "../services/user.service.js";
+import { syncClerkMetaData } from "../services/clerk.service.js";
 
 const handleClerkWebhook = async (req: Request, res: Response) => {
   try {
