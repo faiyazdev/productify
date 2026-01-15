@@ -2,6 +2,7 @@ import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 import { createdAt, deletedAt, id, updatedAt } from "../schemaHelper.js";
 import { UsersTable } from "./users.js";
 import { relations } from "drizzle-orm";
+import { CommentsTable } from "./comments.js";
 
 export const ProductsTable = pgTable("products", {
   id,
@@ -16,9 +17,10 @@ export const ProductsTable = pgTable("products", {
   deletedAt,
 });
 
-export const productsRelations = relations(ProductsTable, ({ one }) => ({
+export const productsRelations = relations(ProductsTable, ({ one, many }) => ({
   owner: one(UsersTable, {
     fields: [ProductsTable.userId],
     references: [UsersTable.id],
   }),
+  comments: many(CommentsTable),
 }));
