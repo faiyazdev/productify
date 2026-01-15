@@ -27,4 +27,20 @@ app.get("/:id", (req: Request, res: Response) => {
   res.json({ message: id });
 });
 
+interface HttpError extends Error {
+  status?: number;
+}
+
+app.use((err: HttpError, _: Request, res: Response) => {
+  const status = err.status || 500;
+  const message = err.message || "Something went wrong";
+
+  res.status(status).json({
+    success: false,
+    status,
+    message,
+    // stack: process.env.NODE_ENV === 'development' ? err.stack : {}
+  });
+});
+
 export default app;

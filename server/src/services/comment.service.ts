@@ -1,0 +1,44 @@
+import { eq } from "drizzle-orm";
+import db from "../db/index.js";
+import { CommentsTable } from "../db/schema.js";
+
+export const insertComment = async (
+  productId: string,
+  userId: string,
+  content: string
+) => {
+  const [createComment] = await db
+    .insert(CommentsTable)
+    .values({
+      productId,
+      userId,
+      content,
+    })
+    .returning();
+
+  if (!createComment) {
+    throw new Error("Failed");
+  }
+
+  return createComment;
+};
+export const deleteCommentForProduct = async (
+  productId: string,
+  userId: string
+) => {
+  const comment = await db.query.CommentsTable.findFirst({
+    where: eq(CommentsTable.productId, productId),
+  });
+
+  if (!comment) {
+    throw new Error("NOT_FOUND");
+  }
+
+  if (comment.userId !== userId) {
+    throw new Error("FORBIDDEN");
+  }
+
+  await db.delete(CommentsTable).where(eq(CommentsTable.id, comment.id));
+
+  return comment;
+};
