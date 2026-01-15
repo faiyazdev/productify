@@ -1,6 +1,8 @@
 import { pgEnum, pgTable, text, uniqueIndex } from "drizzle-orm/pg-core";
 import { createdAt, deletedAt, id, updatedAt } from "../schemaHelper.js";
-import { sql } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
+import { ProductsTable } from "./products.js";
+import { CommentsTable } from "./comments.js";
 
 export const userRoles = ["user", "admin"] as const;
 export type UserRole = (typeof userRoles)[number];
@@ -25,3 +27,8 @@ export const UsersTable = pgTable(
       .where(sql`${table.deletedAt} IS NULL`),
   ]
 );
+
+export const usersRelations = relations(UsersTable, ({ many }) => ({
+  products: many(ProductsTable),
+  comments: many(CommentsTable),
+}));

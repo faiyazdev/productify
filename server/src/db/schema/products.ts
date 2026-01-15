@@ -1,0 +1,24 @@
+import { pgTable, text, uuid } from "drizzle-orm/pg-core";
+import { createdAt, deletedAt, id, updatedAt } from "../schemaHelper.js";
+import { UsersTable } from "./users.js";
+import { relations } from "drizzle-orm";
+
+export const ProductsTable = pgTable("products", {
+  id,
+  title: text().notNull(),
+  description: text(),
+  imageUrl: text("image_url"),
+  userId: uuid("user_id")
+    .references(() => UsersTable.id)
+    .notNull(),
+  createdAt,
+  updatedAt,
+  deletedAt,
+});
+
+export const productsRelations = relations(ProductsTable, ({ one }) => ({
+  owner: one(UsersTable, {
+    fields: [ProductsTable.userId],
+    references: [UsersTable.id],
+  }),
+}));

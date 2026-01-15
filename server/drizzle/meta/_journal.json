@@ -8,6 +8,20 @@
       "when": 1768404651633,
       "tag": "0000_stale_catseye",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1768460851649,
+      "tag": "0001_peaceful_photon",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1768461108965,
+      "tag": "0002_worthless_spencer_smythe",
+      "breakpoints": true
     }
   ]
 }
