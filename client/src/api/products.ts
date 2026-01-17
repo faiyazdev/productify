@@ -14,7 +14,6 @@ export const createProduct = async ({
     description,
     imageUrl,
   });
-   return response.data;
   return response.data;
 };
 
