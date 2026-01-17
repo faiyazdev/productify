@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useState } from "react";
 import {
   ArrowLeftIcon,
@@ -7,9 +7,11 @@ import {
   SparklesIcon,
   TypeIcon,
 } from "lucide-react";
+import { useCreateProduct } from "../hooks/useProducts";
 
 function CreatePage() {
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
+  const createProductMutation = useCreateProduct();
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -18,6 +20,11 @@ function CreatePage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    createProductMutation.mutate(formData, {
+      onSuccess: () => {
+        navigate("/");
+      },
+    });
   };
 
   return (
@@ -90,24 +97,23 @@ function CreatePage() {
               </div>
             </div>
 
-            {/* {createProduct.isError && (
+            {createProductMutation && (
               <div role="alert" className="alert alert-error alert-sm">
                 <span>Failed to create. Try again.</span>
               </div>
-            )} */}
+            )}
 
-            {/* <button
+            <button
               type="submit"
               className="btn btn-primary w-full"
-              disabled={createProduct.isPending}
+              disabled={createProductMutation.isPending}
             >
-              {createProduct.isPending ? (
+              {createProductMutation.isPending ? (
                 <span className="loading loading-spinner" />
               ) : (
                 "Create Product"
               )}
-            </button> */}
-            <button>Submit Product</button>
+            </button>
           </form>
         </div>
       </div>
