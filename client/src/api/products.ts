@@ -14,9 +14,7 @@ export const createProduct = async ({
     description,
     imageUrl,
   });
-  if (response.status !== 201) {
-    throw new Error("Failed to create product");
-  }
+   return response.data;
   return response.data;
 };
 
