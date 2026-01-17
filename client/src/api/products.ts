@@ -19,9 +19,7 @@ export const createProduct = async ({
 
 export const fetchProducts = async () => {
   const response = await axiosInstance.get("/products");
-  if (response.status !== 200) {
-    throw new Error("Failed to fetch products");
-  }
+  if (response.data === null) return [];
   return response.data as {
     title: string;
     description: string;
