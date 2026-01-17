@@ -33,7 +33,7 @@ export const createProduct = async (req: Request, res: Response) => {
     return res.status(500).send("Failed to create product");
   }
 
-  return res.status(201).json({ product });
+  return res.status(201).json(product);
 };
 export const updateProduct = async (req: Request, res: Response) => {
   const { userId } = getAuth(req);
@@ -57,7 +57,7 @@ export const updateProduct = async (req: Request, res: Response) => {
 
   const updatedProduct = await updateProductById(productId, parsed.data);
 
-  return res.status(200).json({ updatedProduct });
+  return res.status(200).json(updatedProduct);
 };
 
 export const deleteProduct = async (req: Request, res: Response) => {
@@ -88,12 +88,12 @@ export const getProduct = async (req: Request, res: Response) => {
   if (!product) {
     return res.status(404).send("Product not found");
   }
-  return res.status(200).json({ product });
+  return res.status(200).json(product);
 };
 export const getProducts = async (_: Request, res: Response) => {
   const products = await getAllProducts();
   if (!products) {
     return res.status(404).send("Products not found");
   }
-  return res.status(200).json({ products });
+  return res.status(200).json(products);
 };
