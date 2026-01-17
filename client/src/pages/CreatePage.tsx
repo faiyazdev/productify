@@ -97,7 +97,7 @@ function CreatePage() {
               </div>
             </div>
 
-            {createProductMutation && (
+            {createProductMutation.isError && (
               <div role="alert" className="alert alert-error alert-sm">
                 <span>Failed to create. Try again.</span>
               </div>

@@ -25,5 +25,16 @@ export const fetchProducts = async () => {
   if (response.status !== 200) {
     throw new Error("Failed to fetch products");
   }
-  return response.data;
+  return response.data as {
+    title: string;
+    description: string;
+    imageUrl: string;
+    author: {
+      name: string;
+      imageUrl: string;
+    };
+    comments: { id: string }[];
+    createdAt: string;
+    id: string;
+  }[];
 };
