@@ -3,9 +3,10 @@ import { Link } from "react-router";
 import { SignInButton } from "@clerk/clerk-react";
 import { useProducts } from "../hooks/useProducts";
 import ProductCard from "../components/ProductCard";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function HomePage() {
-  const { data: products } = useProducts();
+  const { data: products, isLoading } = useProducts();
 
   return (
     // Changed mb-5 to pb-10 to ensure space at the very bottom of the page
@@ -60,6 +61,8 @@ function HomePage() {
               </Link>
             </div>
           </div>
+        ) : isLoading ? (
+          <LoadingSpinner />
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {products?.map((product) => (
