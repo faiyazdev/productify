@@ -43,7 +43,11 @@ export const createProduct = handleAsync(
   },
 );
 export const updateProduct = async (req: Request, res: Response) => {
-  const { userId } = getAuth(req);
+  const { userId: clerkId } = getAuth(req);
+  const userId = await getUserByClerkId(clerkId!);
+  if (!userId) {
+    return res.status(400).send("User not found, failed to create product");
+  }
   const productId = req.params.id as string;
   if (!productId) {
     return res.status(400).send("Product ID is required");
@@ -69,7 +73,11 @@ export const updateProduct = async (req: Request, res: Response) => {
 
 export const deleteProduct = async (req: Request, res: Response) => {
   // Implementation for deleting a product
-  const { userId } = getAuth(req);
+  const { userId: clerkId } = getAuth(req);
+  const userId = await getUserByClerkId(clerkId!);
+  if (!userId) {
+    return res.status(400).send("User not found, failed to create product");
+  }
   const productId = req.params.id as string;
   if (!productId) {
     return res.status(400).send("Product ID is required");
