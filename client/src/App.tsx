@@ -3,11 +3,10 @@ import { Navigate, Route, Routes } from "react-router";
 import HomePage from "./pages/HomePage";
 import CreatePage from "./pages/CreatePage";
 import useAuthReq from "./hooks/useAuthReq";
-import LoadingSpinner from "./components/LoadingSpinner";
 
 function App() {
   const { isSignedIn, isClerkLoaded } = useAuthReq();
-  if (!isClerkLoaded) return <LoadingSpinner />;
+  if (!isClerkLoaded) return null;
   return (
     <div className="min-h-screen bg-base-100">
       <Navbar />

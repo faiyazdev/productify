@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import type { z } from "zod";
-import { ProductsTable } from "../db/schema.js";
+import { ProductsTable, UsersTable } from "../db/schema.js";
 import {
   createProductSchema,
   updateProductSchema,
@@ -12,7 +12,7 @@ type UpdateProductInput = z.infer<typeof updateProductSchema>;
 
 export const insertProduct = async (
   userId: string,
-  data: CreateProductInput
+  data: CreateProductInput,
 ) => {
   const [product] = await db
     .insert(ProductsTable)
@@ -23,7 +23,7 @@ export const insertProduct = async (
 
 export const updateProductById = async (
   productId: string,
-  data: UpdateProductInput
+  data: UpdateProductInput,
 ) => {
   const [product] = await db
     .update(ProductsTable)
@@ -42,6 +42,15 @@ export const getProductById = async (productId: string) => {
     where: eq(ProductsTable.id, productId),
     with: { owner: true },
   });
+};
+export const getUserByClerkId = async (clerkId: string) => {
+  const res = await db.query.UsersTable.findFirst({
+    where: eq(UsersTable.clerkId, clerkId),
+    columns: {
+      id: true,
+    },
+  });
+  return res?.id;
 };
 export const isProductExist = async (productId: string) => {
   return await db.query.ProductsTable.findFirst({
