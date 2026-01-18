@@ -24,7 +24,7 @@ export const fetchProducts = async () => {
     title: string;
     description: string;
     imageUrl: string;
-    author: {
+    owner: {
       name: string;
       imageUrl: string;
     };

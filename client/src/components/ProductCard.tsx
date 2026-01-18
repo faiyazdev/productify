@@ -10,7 +10,7 @@ const ProductCard = ({
     title: string;
     description: string;
     imageUrl: string;
-    author: {
+    owner: {
       name: string;
       imageUrl: string;
     };
@@ -45,18 +45,15 @@ const ProductCard = ({
         <div className="divider my-1"></div>
 
         <div className="flex items-center justify-between">
-          {product.author && (
+          {product.owner && (
             <div className="flex items-center gap-2">
               <div className="avatar">
                 <div className="w-6 rounded-full ring-1 ring-primary">
-                  <img
-                    src={product.author.imageUrl}
-                    alt={product.author.name}
-                  />
+                  <img src={product.owner.imageUrl} alt={product.owner.name} />
                 </div>
               </div>
               <span className="text-xs text-base-content/60">
-                {product.author.name}
+                {product.owner.name}
               </span>
             </div>
           )}
