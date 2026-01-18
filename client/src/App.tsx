@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from "react-router";
 import HomePage from "./pages/HomePage";
 import CreatePage from "./pages/CreatePage";
 import useAuthReq from "./hooks/useAuthReq";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
 
 function App() {
   const { isSignedIn, isClerkLoaded } = useAuthReq();
@@ -13,6 +14,7 @@ function App() {
       <main className="max-w-6xl mx-auto px-4 py-6">
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/product/:id" element={<ProductDetailsPage />} />
 
           <Route
             path="/create"
