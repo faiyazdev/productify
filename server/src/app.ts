@@ -4,7 +4,7 @@ import { env } from "./config/env.js";
 import { clerkMiddleware } from "@clerk/express";
 import clerkRoutes from "./routes/clerk.routes.js";
 import productRoutes from "./routes/product.routes.js";
-import type { Request, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 
 const app = express();
 
@@ -15,31 +15,21 @@ app.use(
   cors({
     origin: ["http://localhost:5173", env.FRONTEND_URL],
     credentials: true, // Allow cookies
-  })
+  }),
 );
 
 // routes
 
 app.use("/api/webhooks", clerkRoutes);
 app.use("/api/products", productRoutes);
-app.get("/:id", (req: Request, res: Response) => {
-  const { id } = req.params;
-  res.json({ message: id });
-});
 
-interface HttpError extends Error {
-  status?: number;
-}
-
-app.use((err: HttpError, _: Request, res: Response) => {
-  const status = err.status || 500;
+app.use((err: Error, _: Request, res: Response, _next: NextFunction) => {
   const message = err.message || "Something went wrong";
 
-  res.status(status).json({
+  res.json({
     success: false,
-    status,
     message,
-    // stack: process.env.NODE_ENV === 'development' ? err.stack : {}
+    stack: err.stack ? err.stack : {},
   });
 });
 

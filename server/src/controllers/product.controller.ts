@@ -8,33 +8,40 @@ import {
   deleteProductById,
   getAllProducts,
   getProductById,
+  getUserByClerkId,
   insertProduct,
   isProductExist,
   updateProductById,
 } from "../services/product.service.js";
+import handleAsync from "../utils/handleAsync.js";
 
-export const createProduct = async (req: Request, res: Response) => {
-  // Implementation for creating a product
-  const { userId } = getAuth(req);
-  const parsedData = createProductSchema.safeParse(req.body);
-  if (!parsedData.success) {
-    return res
-      .status(400)
-      .json({ error: "Invalid input data for creating product" });
-  }
-  const { title, description, imageUrl } = parsedData.data;
-
-  const product = await insertProduct(userId!, {
-    title,
-    description,
-    imageUrl,
-  });
-  if (!product) {
-    return res.status(500).send("Failed to create product");
-  }
-
-  return res.status(201).json(product);
-};
+export const createProduct = handleAsync(
+  async (req: Request, res: Response) => {
+    const { userId: clerkId } = getAuth(req);
+    const userId = await getUserByClerkId(clerkId!);
+    if (!userId) {
+      return res.status(400).send("User not found, failed to create product");
+    }
+    const parsedData = createProductSchema.safeParse(req.body);
+    if (!parsedData.success) {
+      return res
+        .status(400)
+        .json({ error: "Invalid input data for creating product" });
+    }
+    const { title, description, imageUrl } = parsedData.data;
+    try {
+      const product = await insertProduct(userId, {
+        title,
+        description,
+        imageUrl,
+      });
+      return res.status(201).json(product);
+    } catch (err) {
+      console.log("product creation failed", err);
+      return res.status(500).send("Failed to create product");
+    }
+  },
+);
 export const updateProduct = async (req: Request, res: Response) => {
   const { userId } = getAuth(req);
   const productId = req.params.id as string;
