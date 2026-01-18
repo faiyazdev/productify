@@ -1,23 +1,25 @@
 import {
   ArrowLeftIcon,
   EditIcon,
-  //   Trash2Icon,
   CalendarIcon,
   UserIcon,
+  Trash2Icon,
 } from "lucide-react";
 import { useAuth } from "@clerk/clerk-react";
-import { useParams, Link } from "react-router";
-import { useProduct } from "../hooks/useProducts";
+import { useParams, Link, useNavigate } from "react-router";
+import { useDeleteProduct, useProduct } from "../hooks/useProducts";
 import LoadingSpinner from "../components/LoadingSpinner";
 
 function ProductDetailsPage() {
   const { id } = useParams();
   const { userId } = useAuth();
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
   const { data: product, error, isLoading } = useProduct(id!);
+  const deleteProduct = useDeleteProduct();
   const handleDelete = () => {
-    // if (confirm("Delete this product permanently?")) {
-    // }
+    if (confirm("Delete this product permanently?")) {
+      deleteProduct.mutate(id!, { onSuccess: () => navigate("/") });
+    }
   };
 
   if (isLoading) return <LoadingSpinner />;
@@ -54,13 +56,13 @@ function ProductDetailsPage() {
             <button
               onClick={handleDelete}
               className="btn btn-error btn-sm gap-1"
-              //   disabled={deleteProduct.isPending}
+              disabled={deleteProduct.isPending}
             >
-              {/* {deleteProduct.isPending ? (
+              {deleteProduct.isPending ? (
                 <span className="loading loading-spinner loading-xs" />
               ) : (
                 <Trash2Icon className="size-4" />
-              )} */}
+              )}
               Delete
             </button>
           </div>
