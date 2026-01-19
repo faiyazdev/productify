@@ -9,6 +9,7 @@ import { useAuth } from "@clerk/clerk-react";
 import { useParams, Link, useNavigate } from "react-router";
 import { useDeleteProduct, useProduct } from "../hooks/useProducts";
 import LoadingSpinner from "../components/LoadingSpinner";
+import CommentsSection from "../components/CommentSection";
 
 function ProductDetailsPage() {
   const { id } = useParams();
@@ -126,15 +127,15 @@ function ProductDetailsPage() {
       </div>
 
       {/* Comments */}
-      {/* <div className="card bg-base-300">
+      <div className="card bg-base-300">
         <div className="card-body">
           <CommentsSection
-            productId={id!}
+            productId={product.id}
             comments={product.comments}
-            currentUserId={userId!}
+            currentUserId={product.owner.id}
           />
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }
