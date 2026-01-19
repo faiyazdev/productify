@@ -4,6 +4,7 @@ import {
   deleteProduct,
   fetchProduct,
   fetchProducts,
+  updateProduct,
 } from "../api/products";
 
 export function useCreateProduct() {
@@ -37,6 +38,18 @@ export const useDeleteProduct = () => {
     onSuccess: () => {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["products"] });
+    },
+  });
+};
+export const useUpdateProduct = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: updateProduct,
+    onSuccess: (_, variable) => {
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+      queryClient.invalidateQueries({
+        queryKey: ["product", variable.productId],
+      });
     },
   });
 };

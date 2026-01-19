@@ -16,6 +16,23 @@ export const createProduct = async ({
   });
   return response.data;
 };
+export const updateProduct = async ({
+  productId,
+  productData,
+}: {
+  productId: string;
+  productData: {
+    title?: string;
+    description?: string;
+    imageUrl?: string;
+  };
+}) => {
+  const response = await axiosInstance.put(
+    `/products/${productId}`,
+    productData,
+  );
+  return response.data;
+};
 
 export const fetchProducts = async () => {
   const response = await axiosInstance.get("/products");
