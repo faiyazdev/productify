@@ -11,4 +11,12 @@ declare global {
     dbId?: string;
     role?: UserRole;
   }
+  namespace Express {
+    interface Request {
+      user: {
+        id: string;
+        clerkId: string;
+      };
+    }
+  }
 }

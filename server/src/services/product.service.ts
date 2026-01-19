@@ -48,9 +48,10 @@ export const getUserByClerkId = async (clerkId: string) => {
     where: eq(UsersTable.clerkId, clerkId),
     columns: {
       id: true,
+      clerkId: true,
     },
   });
-  return res?.id;
+  return res;
 };
 export const isProductExist = async (productId: string) => {
   return await db.query.ProductsTable.findFirst({
