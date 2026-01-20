@@ -5,6 +5,7 @@ import CreatePage from "./pages/CreatePage";
 import useAuthReq from "./hooks/useAuthReq";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import EditProductPage from "./pages/EditProductPage";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   const { isSignedIn, isClerkLoaded } = useAuthReq();
@@ -20,6 +21,10 @@ function App() {
           <Route
             path="/create"
             element={isSignedIn ? <CreatePage /> : <Navigate to={"/"} />}
+          />
+          <Route
+            path="/profile"
+            element={isSignedIn ? <ProfilePage /> : <Navigate to={"/"} />}
           />
           <Route
             path="/edit/:id"
