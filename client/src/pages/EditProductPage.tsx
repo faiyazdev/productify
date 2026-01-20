@@ -14,7 +14,7 @@ function EditProductPage() {
 
   if (isLoading) return <LoadingSpinner />;
 
-  if (!product || !id || product.owner.id !== userId) {
+  if (!product || !id || product.owner.clerkId !== userId) {
     return (
       <div className="card bg-base-300 max-w-md mx-auto">
         <div className="card-body items-center text-center">

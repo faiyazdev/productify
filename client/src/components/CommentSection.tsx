@@ -1,12 +1,8 @@
 import { useState } from "react";
 import { useAuth, SignInButton } from "@clerk/clerk-react";
-import {
-  SendIcon,
-  Trash2Icon,
-  MessageSquareIcon,
-  LogInIcon,
-} from "lucide-react";
-import { useCreateComment, useDeleteComment } from "../hooks/useComments";
+import { SendIcon, MessageSquareIcon, LogInIcon } from "lucide-react";
+import { useCreateComment } from "../hooks/useComments";
+import CommentCard from "./CommentCard";
 
 function CommentsSection({
   productId,
@@ -25,7 +21,6 @@ function CommentsSection({
   const { isSignedIn } = useAuth();
   const [content, setContent] = useState("");
   const createComment = useCreateComment();
-  const deleteComment = useDeleteComment();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -88,42 +83,12 @@ function CommentsSection({
           </div>
         ) : (
           comments.map((comment) => (
-            <div key={comment.id} className="chat chat-start">
-              <div className="chat-image avatar">
-                <div className="w-8 rounded-full">
-                  <img
-                    src={comment.owner?.imageUrl}
-                    alt={comment.owner?.name}
-                  />
-                </div>
-              </div>
-
-              <div className="chat-header text-xs opacity-70 mb-2">
-                {comment.owner?.name}
-                <time className="ml-2 text-xs opacity-50">
-                  {new Date(comment.createdAt).toLocaleDateString()}
-                </time>
-              </div>
-
-              <div className="chat-bubble chat-bubble-neutral text-sm">
-                {comment.content}
-              </div>
-
-              {currentUserId === comment.owner.id && (
-                <div className="chat-footer">
-                  <button
-                    className="btn btn-ghost btn-xs text-error"
-                    disabled={deleteComment.isPending}
-                  >
-                    {deleteComment.isPending ? (
-                      <span className="loading loading-spinner loading-xs" />
-                    ) : (
-                      <Trash2Icon className="size-3" />
-                    )}
-                  </button>
-                </div>
-              )}
-            </div>
+            <CommentCard
+              key={comment.id}
+              comment={comment}
+              currentUserId={currentUserId}
+              productId={productId}
+            />
           ))
         )}
       </div>
