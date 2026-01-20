@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   createProduct,
   deleteProduct,
+  fetchMyProducts,
   fetchProduct,
   fetchProducts,
   updateProduct,
@@ -22,6 +23,12 @@ export function useProducts() {
   return useQuery({
     queryFn: fetchProducts,
     queryKey: ["products"],
+  });
+}
+export function useMyProducts() {
+  return useQuery({
+    queryFn: fetchMyProducts,
+    queryKey: ["myproducts"],
   });
 }
 export const useProduct = (id: string) => {

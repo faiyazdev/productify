@@ -50,6 +50,22 @@ export const fetchProducts = async () => {
     id: string;
   }[];
 };
+export const fetchMyProducts = async () => {
+  const response = await axiosInstance.get("/products/me");
+  if (response.data === null) return [];
+  return response.data as {
+    title: string;
+    description: string;
+    imageUrl: string;
+    owner: {
+      name: string;
+      imageUrl: string;
+    };
+    comments: { id: string }[];
+    createdAt: string;
+    id: string;
+  }[];
+};
 export const fetchProduct = async (id: string) => {
   const response = await axiosInstance.get(`/products/${id}`);
   return response.data as {
