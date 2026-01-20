@@ -40,7 +40,14 @@ export const deleteProductById = async (productId: string) => {
 export const getProductById = async (productId: string) => {
   return await db.query.ProductsTable.findFirst({
     where: eq(ProductsTable.id, productId),
-    with: { owner: true },
+    with: {
+      owner: true,
+      comments: {
+        with: {
+          owner: true,
+        },
+      },
+    },
   });
 };
 export const getUserByClerkId = async (clerkId: string) => {

@@ -6,10 +6,10 @@ import {
 } from "../controllers/comment.controller.js";
 import { requireUser } from "../middlewares/requireUser.js";
 const router = express.Router();
+router.post("/:productId", requireAuth(), requireUser, createComment);
 
 router
-  .route("/:productId")
-  .post(requireAuth(), requireUser, createComment)
+  .route("/:commentId/product/:productId")
   .delete(requireAuth(), requireUser, deleteComment);
 
 export default router;
