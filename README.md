@@ -1,11 +1,10 @@
-<h1 align="center">🛒 Full-Stack E-Commerce Platform</h1>
-
 ## 👋 About This Project
 
 I built this full-stack e-commerce platform as part of my journey to become a proficient full-stack developer. This project represents my deep dive into modern web development practices, focusing on **end-to-end type safety**, **advanced state management**, and **scalable architecture**.
 
 As a developer passionate about React, Next.js, Express, and modern ORMs like Drizzle and Prisma, I designed this application to challenge myself and showcase production-ready code that I'd be proud to share with fellow developers and potential employers.
 
+> 💡 **Moving on to the next part...**
 ## ✨ Features
 
 ### 🔐 Authentication & Authorization
@@ -24,10 +23,13 @@ As a developer passionate about React, Next.js, Express, and modern ORMs like Dr
 - **Serverless Database** - I integrated Neon serverless PostgreSQL for scalability
 - **Type-Safe ORM** - I chose Drizzle ORM for its zero runtime overhead and excellent TypeScript support
 
+&nbsp;
+<div align="center">
+  <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png" />
+</div>
 
-</br>
 
-## 🛠️ Tech Stack
+<h2 align="center">🛠️ Tech Stack ⚡️ Frontend + Backend</h2>
 
 * **Frontend Library**: React.js
 * **Frontend + Backend**: TypeScript
@@ -44,7 +46,9 @@ As a developer passionate about React, Next.js, Express, and modern ORMs like Dr
 * **Build Tool**: Vite
 * **Schema Validation**: Zod
 
-Visit `http://localhost:5173` to see the application!
+<div align="center">
+  <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png" />
+</div>
 
 ## 📌 What I Learned
 
@@ -57,7 +61,7 @@ I built this project with specific learning goals in mind:
 
 </br>
 
-### Key Takeaways
+### ⚡️ Key Takeaways
 
 **Type Safety is Game-Changing** - Having types flow from the database to the frontend caught countless bugs before runtime.
 
@@ -67,7 +71,9 @@ I built this project with specific learning goals in mind:
 
 **ORMs Can Be Beautiful** - Drizzle's approach to type inference made database work actually enjoyable.
 
-</br>
+<div align="center">
+  <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/colored.png" />
+</div>
 
 <h1 align="center">🐛 Challenges & Solutions</h1>
 
@@ -123,7 +129,6 @@ For more discussion and context, check out this Reddit thread:
 
 - [ ] **Stripe Integration** - I'm planning to implement complete payment processing
 - [ ] **Cloudinary for Media** - I'll be adding image upload and optimization (I already know Cloudinary, just need to integrate it)
-- [ ] **Framer Motion Animations** - I want to add smooth, professional animations throughout
 - [ ] **Advanced Search & Filters** - Full-text search with category filtering
 - [ ] **Complete Order Flow** - Cart, checkout, and order history
 - [ ] **Admin Dashboard** - Analytics and inventory management panel
@@ -131,14 +136,41 @@ For more discussion and context, check out this Reddit thread:
 ### 💡 Future Learning Goals
 
 - Implement real-time features with WebSockets
+- **Framer Motion Animations** - I want to add smooth, professional animations throughout
 - Add comprehensive testing (Jest, React Testing Library)
-- Optimize performance with code splitting and lazy loading
 
 ## 🤝 Let's Connect
 
 I'm always excited to connect with fellow developers, discuss this project, or collaborate on new ideas! </br>
 If you found this project interesting or helpful, I'd appreciate a star! ⭐
 
-- 💼 **LinkedIn**: https://www.linkedin.com/in/faiyazdev
-- 🐦 **Twitter**: https://x.com/faiyazdev
-- 📧 **Email**: faiyazsarkar06@email.com
+
+<img width="100%" src="https://capsule-render.vercel.app/api?type=rect&color=0:3b82f6,100:8b5cf6&height=2"/>
+
+<table align="center">
+  <tr>
+    <td>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="https://www.linkedin.com/in/faiyazdev"><img src="https://skillicons.dev/icons?i=linkedin" /></a>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="https://x.com/faiyazdev"><img src="https://skillicons.dev/icons?i=twitter" /></a>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="mailto:faiyazsarkar06@email.com"><img src="https://skillicons.dev/icons?i=gmail" /></a>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+    <td>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="https://www.linkedin.com/in/faiyazdev"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="https://x.com/faiyazdev"><img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white" /></a>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="mailto:faiyazsarkar06@email.com"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </td>
+  </tr>
+</table>
+
+<!-- <p align="center">
+  <img src="https://skillicons.dev/icons?i=react,nextjs,express,postgres" />
+</p> -->
+  
