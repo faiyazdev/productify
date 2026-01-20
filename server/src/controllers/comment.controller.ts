@@ -18,7 +18,7 @@ export const createComment = handleAsync(
         .json({ error: "Invalid input data for creating comment" });
     }
 
-    const productId = getParam(req.params.id);
+    const productId = getParam(req.params.productId);
     if (!productId) {
       return res.status(400).json({
         error: "Product ID is required",
@@ -36,12 +36,16 @@ export const deleteComment = handleAsync(
   async (req: Request, res: Response) => {
     const { id: userId } = req.user;
 
-    const productId = getParam(req.params.id);
+    const productId = getParam(req.params.productId);
+    const commentId = getParam(req.params.commentId);
     if (!productId) {
       return res.status(400).send("Product ID is required");
     }
+    if (!commentId) {
+      return res.status(400).send("Comment ID is required");
+    }
 
-    await deleteCommentForProduct(productId, userId);
+    await deleteCommentForProduct(commentId, productId, userId);
     return res.status(200).send("Comment deleted successfully");
   },
 );

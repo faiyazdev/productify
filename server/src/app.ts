@@ -4,6 +4,7 @@ import { env } from "./config/env.js";
 import { clerkMiddleware } from "@clerk/express";
 import clerkRoutes from "./routes/clerk.routes.js";
 import productRoutes from "./routes/product.routes.js";
+import commentRoutes from "./routes/comment.routes.js";
 import type { NextFunction, Request, Response } from "express";
 
 const app = express();
@@ -22,6 +23,7 @@ app.use(
 
 app.use("/api/webhooks", clerkRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/comments", commentRoutes);
 
 app.use((err: Error, _: Request, res: Response, _next: NextFunction) => {
   const message = err.message || "Something went wrong";
