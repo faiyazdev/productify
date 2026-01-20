@@ -71,3 +71,9 @@ export const getAllProducts = async () => {
     with: { owner: true },
   });
 };
+export const getMyProducts = async (userId: string) => {
+  return await db.query.ProductsTable.findMany({
+    with: { owner: true },
+    where: eq(ProductsTable.userId, userId),
+  });
+};
