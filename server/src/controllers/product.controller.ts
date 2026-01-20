@@ -6,6 +6,7 @@ import {
 import {
   deleteProductById,
   getAllProducts,
+  getMyProducts,
   getProductById,
   insertProduct,
   isProductExist,
@@ -109,5 +110,11 @@ export const getProduct = handleAsync(async (req: Request, res: Response) => {
 
 export const getProducts = handleAsync(async (_: Request, res: Response) => {
   const products = await getAllProducts();
+  return res.status(200).json(products);
+});
+export const myProducts = handleAsync(async (req: Request, res: Response) => {
+  const { id: userId } = req.user;
+
+  const products = await getMyProducts(userId);
   return res.status(200).json(products);
 });

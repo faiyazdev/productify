@@ -5,6 +5,7 @@ import {
   deleteProduct,
   getProduct,
   getProducts,
+  myProducts,
   updateProduct,
 } from "../controllers/product.controller.js";
 import { requireUser } from "../middlewares/requireUser.js";
@@ -14,6 +15,9 @@ router
   .route("/")
   .get(getProducts)
   .post(requireAuth(), requireUser, createProduct);
+
+router.get("/me", requireAuth(), requireUser, myProducts);
+
 router
   .route("/:id")
   .get(getProduct)
