@@ -20,21 +20,14 @@ export const createComment = async ({
   };
 };
 export const deleteComment = async ({
+  commentId,
   productId,
-  content,
 }: {
+  commentId: string;
   productId: string;
-  content: string;
 }) => {
-  const response = await axiosInstance.post(`/comments/${productId}`, {
-    content,
-  });
-  return response.data as {
-    id: string;
-    createdAt: Date;
-    updatedAt: Date;
-    userId: string;
-    content: string;
-    productId: string;
-  };
+  const response = await axiosInstance.delete(
+    `/comments/${commentId}/product/${productId}`,
+  );
+  return response.data;
 };
