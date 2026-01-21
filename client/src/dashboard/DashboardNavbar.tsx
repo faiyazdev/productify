@@ -1,19 +1,14 @@
 import { Link } from "react-router";
-import {
-  SignInButton,
-  SignUpButton,
-  UserButton,
-  useAuth,
-} from "@clerk/clerk-react";
+import { SignInButton, SignUpButton, useAuth } from "@clerk/clerk-react";
 import {
   ShoppingBagIcon,
-  PlusIcon,
-  UserIcon,
-  LayoutDashboardIcon,
+  HomeIcon,
+  ListOrdered,
+  ShoppingCartIcon,
 } from "lucide-react";
-import ThemeSelector from "./ThemeSelector";
+import ThemeSelector from "../components/ThemeSelector";
 
-function Navbar() {
+function DashboardNavbar() {
   const { isSignedIn } = useAuth();
 
   return (
@@ -24,7 +19,7 @@ function Navbar() {
         <Link to="/" className="btn btn-ghost gap-2 px-0">
           <ShoppingBagIcon className="size-5 text-primary" />
           <span className="text-lg font-bold font-mono uppercase tracking-wider">
-            Productify
+            Productify-Dashboard
           </span>
         </Link>
         {/* </div> */}
@@ -33,19 +28,24 @@ function Navbar() {
           <ThemeSelector />
           {isSignedIn ? (
             <>
-              <Link to="/dashboard" className="btn btn-ghost btn-sm gap-1">
-                <LayoutDashboardIcon className="size-4" />
-                <span className="hidden sm:inline">Dashboard</span>
+              <Link to="/" className="btn btn-ghost btn-sm gap-1">
+                <HomeIcon className="size-4" />
+                <span className="hidden sm:inline">Home</span>
               </Link>
-              <Link to="/create" className="btn btn-primary btn-sm gap-1">
-                <PlusIcon className="size-4" />
-                <span className="hidden sm:inline">New Product</span>
+              <Link
+                to="/dashboard/products"
+                className="btn btn-ghost btn-sm gap-1"
+              >
+                <ShoppingCartIcon className="size-4" />
+                <span className="hidden sm:inline">Products</span>
               </Link>
-              <Link to="/profile" className="btn btn-ghost btn-sm gap-1">
-                <UserIcon className="size-4" />
-                <span className="hidden sm:inline">Profile</span>
+              <Link
+                to="/dashboard/sales"
+                className="btn btn-ghost btn-sm gap-1"
+              >
+                <ListOrdered className="size-4" />
+                <span className="hidden sm:inline">Sales</span>
               </Link>
-              <UserButton />
             </>
           ) : (
             <>
@@ -64,4 +64,4 @@ function Navbar() {
     </div>
   );
 }
-export default Navbar;
+export default DashboardNavbar;
