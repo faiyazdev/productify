@@ -22,6 +22,13 @@
       "when": 1768461108965,
       "tag": "0002_worthless_spencer_smythe",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1769072877566,
+      "tag": "0003_puzzling_zeigeist",
+      "breakpoints": true
     }
   ]
 }
