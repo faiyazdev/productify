@@ -14,9 +14,10 @@ export const insertProduct = async (
   userId: string,
   data: CreateProductInput,
 ) => {
+  const priceInCents = Math.round(data.price * 100);
   const [product] = await db
     .insert(ProductsTable)
-    .values({ ...data, userId })
+    .values({ ...data, userId, priceInCents })
     .returning();
   return product;
 };
@@ -25,9 +26,19 @@ export const updateProductById = async (
   productId: string,
   data: UpdateProductInput,
 ) => {
+  const updateData: Partial<typeof ProductsTable.$inferInsert> = {
+    ...data,
+  };
+  delete (updateData as any).price; //! in drizzle and prisma : if a field has value of undefined it's ignored or untouched. so it's extra protection or something new i learnt
+
+  // ✅ convert only if provided, it's mendatory
+  if (data.price !== undefined) {
+    updateData.priceInCents = Math.round(data.price * 100);
+  }
+
   const [product] = await db
     .update(ProductsTable)
-    .set(data)
+    .set(updateData)
     .where(eq(ProductsTable.id, productId))
     .returning();
   return product;
