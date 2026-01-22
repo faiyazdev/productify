@@ -22,7 +22,7 @@ export const ProductsTable = pgTable("products", {
   userId: uuid("user_id")
     .references(() => UsersTable.id)
     .notNull(),
-  productStatus: ProductStatusEnum().default("public").notNull(),
+  status: ProductStatusEnum().default("public").notNull(),
   priceInCents,
   createdAt,
   updatedAt,
