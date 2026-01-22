@@ -1,8 +1,18 @@
-import { pgTable, text, uuid } from "drizzle-orm/pg-core";
-import { createdAt, deletedAt, id, updatedAt } from "../schemaHelper.js";
+import { pgEnum, pgTable, text, uuid } from "drizzle-orm/pg-core";
+import {
+  createdAt,
+  deletedAt,
+  id,
+  priceInCents,
+  updatedAt,
+} from "../schemaHelper.js";
 import { UsersTable } from "./users.js";
 import { relations } from "drizzle-orm";
 import { CommentsTable } from "./comments.js";
+
+export const productStatuses = ["public", "private"] as const;
+export type ProductStatus = (typeof productStatuses)[number];
+export const ProductStatusEnum = pgEnum("product_status", productStatuses);
 
 export const ProductsTable = pgTable("products", {
   id,
@@ -12,6 +22,8 @@ export const ProductsTable = pgTable("products", {
   userId: uuid("user_id")
     .references(() => UsersTable.id)
     .notNull(),
+  productStatus: ProductStatusEnum().default("public").notNull(),
+  priceInCents,
   createdAt,
   updatedAt,
   deletedAt,
