@@ -4,6 +4,9 @@ import {
   CalendarIcon,
   UserIcon,
   Trash2Icon,
+  GlobeIcon,
+  LockIcon,
+  DollarSignIcon,
 } from "lucide-react";
 import { useAuth } from "@clerk/clerk-react";
 import { useParams, Link, useNavigate } from "react-router";
@@ -85,6 +88,30 @@ function ProductDetailsPage() {
         <div className="card bg-base-300">
           <div className="card-body">
             <h1 className="card-title text-2xl">{product.title}</h1>
+
+            {/* PRICE & STATUS */}
+            <div className="flex flex-wrap items-center gap-4 mt-1">
+              <div className="flex items-center gap-1 text-lg font-semibold text-primary">
+                <DollarSignIcon className="size-5" />
+                {product.priceInCents}
+              </div>
+
+              <span
+                className={`badge badge-outline ${
+                  product.status === "public" ? "badge-success" : "badge-ghost"
+                }`}
+              >
+                {product.status === "public" ? (
+                  <>
+                    <GlobeIcon className="size-3 mr-1" /> Public
+                  </>
+                ) : (
+                  <>
+                    <LockIcon className="size-3 mr-1" /> Private
+                  </>
+                )}
+              </span>
+            </div>
 
             <div className="flex flex-wrap gap-4 text-sm text-base-content/60 my-2">
               <div className="flex items-center gap-1">

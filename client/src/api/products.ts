@@ -82,6 +82,8 @@ export const fetchProduct = async (id: string) => {
     title: string;
     description: string;
     imageUrl: string;
+    priceInCents: number;
+    status: "public" | "private";
     owner: {
       id: string;
       name: string;
