@@ -31,6 +31,8 @@ export const updateProduct = async ({
     title?: string;
     description?: string;
     imageUrl?: string;
+    price?: number;
+    status?: "public" | "private";
   };
 }) => {
   const response = await axiosInstance.put(
@@ -82,6 +84,8 @@ export const fetchProduct = async (id: string) => {
     title: string;
     description: string;
     imageUrl: string;
+    priceInCents: number;
+    status: "public" | "private";
     owner: {
       id: string;
       name: string;
