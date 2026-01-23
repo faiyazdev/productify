@@ -42,7 +42,7 @@ function ProductDetailsPage() {
     );
   }
 
-  const isOwner = userId === product?.owner.clerkId;
+  const isOwner = userId === product?.owner?.clerkId;
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
