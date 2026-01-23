@@ -6,8 +6,9 @@ import useAuthReq from "./hooks/useAuthReq";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import EditProductPage from "./pages/EditProductPage";
 import ProfilePage from "./pages/ProfilePage";
-import DashboardNavbar from "./dashboard/DashboardNavbar";
-import DashboardPage from "./dashboard/DashboardPage";
+import DashboardNavbar from "./dashboard/components/DashboardNavbar";
+import DashboardPage from "./dashboard/pages/DashboardPage";
+import DashboardProducts from "./dashboard/pages/DashboardProducts";
 
 function App() {
   const { isSignedIn, isClerkLoaded } = useAuthReq();
@@ -26,6 +27,7 @@ function App() {
                 <main className="max-w-6xl mx-auto px-4 py-6">
                   <Routes>
                     <Route index element={<DashboardPage />} />
+                    <Route path="products" element={<DashboardProducts />} />
                     {/* Add more dashboard sub-routes here */}
                   </Routes>
                 </main>
