@@ -4,7 +4,7 @@ import { useMyProducts } from "../../hooks/useProducts";
 import { Link } from "react-router";
 
 function DashboardPage() {
-  const { data: products, isLoading } = useMyProducts();
+  const { data: products, isLoading, error } = useMyProducts();
 
   return (
     <div>
@@ -19,6 +19,10 @@ function DashboardPage() {
       </div>
       {isLoading ? (
         <LoadingSpinner />
+      ) : error ? (
+        <div className="alert alert-error">
+          Failed to load products. Please retry.
+        </div>
       ) : (
         <div className="stats bg-base-300 w-full mt-5">
           <div className="stat">
