@@ -14,9 +14,10 @@ export const insertProduct = async (
   userId: string,
   data: CreateProductInput,
 ) => {
+  const { price, ...rest } = data;
   const [product] = await db
     .insert(ProductsTable)
-    .values({ ...data, userId })
+    .values({ ...rest, userId, priceInCents: Math.round(price * 100) })
     .returning();
   return product;
 };
@@ -25,11 +26,22 @@ export const updateProductById = async (
   productId: string,
   data: UpdateProductInput,
 ) => {
+  const { price, ...rest } = data;
+
+  const updatedData: Partial<typeof ProductsTable.$inferInsert> = {
+    ...rest,
+  };
+
+  if (price !== undefined) {
+    updatedData.priceInCents = Math.round(price * 100);
+  }
+
   const [product] = await db
     .update(ProductsTable)
-    .set(data)
+    .set(updatedData)
     .where(eq(ProductsTable.id, productId))
     .returning();
+
   return product;
 };
 

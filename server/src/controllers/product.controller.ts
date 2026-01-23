@@ -26,12 +26,14 @@ export const createProduct = handleAsync(
         .json({ error: "Invalid input data for creating product" });
     }
 
-    const { title, description, imageUrl } = parsedData.data;
+    const { title, description, imageUrl, price, status } = parsedData.data;
 
     const product = await insertProduct(userId, {
       title,
       description,
       imageUrl,
+      price,
+      status,
     });
 
     return res.status(201).json(product);
