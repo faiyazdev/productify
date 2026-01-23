@@ -11,7 +11,7 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 
 const DashboardProducts = () => {
   const navigate = useNavigate();
-  const { data: products, isLoading } = useMyProducts();
+  const { data: products, isLoading, error } = useMyProducts();
   const deleteProduct = useDeleteProduct();
 
   const handleDelete = (id: string) => {
@@ -19,7 +19,14 @@ const DashboardProducts = () => {
   };
 
   if (isLoading) return <LoadingSpinner />;
-
+  if (isLoading) return <LoadingSpinner />;
+  if (error) {
+    return (
+      <div className="alert alert-error">
+        Failed to load products. Please try again.
+      </div>
+    );
+  }
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
