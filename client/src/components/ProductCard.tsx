@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { MessageCircleIcon } from "lucide-react";
+import { DollarSignIcon } from "lucide-react";
 
 const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
 
@@ -10,6 +10,7 @@ const ProductCard = ({
     title: string;
     description: string;
     imageUrl: string;
+    priceInCents: number;
     owner: {
       name: string;
       imageUrl: string;
@@ -20,7 +21,8 @@ const ProductCard = ({
   };
 }) => {
   const isNew = new Date(product.createdAt) > oneWeekAgo;
-  console.log(product);
+  const price = (product.priceInCents / 100).toFixed(2);
+
   return (
     <Link
       to={`/product/${product.id}`}
@@ -33,16 +35,20 @@ const ProductCard = ({
           className="rounded-xl h-40 w-full object-cover"
         />
       </figure>
+
       <div className="card-body p-4">
         <h2 className="card-title text-base">
           {product.title}
-          {isNew && <span className="badge badge-secondary badge-sm">NEW</span>}
+          {isNew && (
+            <span className="badge badge-secondary badge-sm ml-1">NEW</span>
+          )}
         </h2>
+
         <p className="text-sm text-base-content/70 line-clamp-2">
           {product.description}
         </p>
 
-        <div className="divider my-1"></div>
+        <div className="divider my-1" />
 
         <div className="flex items-center justify-between">
           {product.owner && (
@@ -57,12 +63,11 @@ const ProductCard = ({
               </span>
             </div>
           )}
-          {product.comments && (
-            <div className="flex items-center gap-1 text-base-content/50">
-              <MessageCircleIcon className="size-3" />
-              <span className="text-xs">{product.comments.length}</span>
-            </div>
-          )}
+          {/* PRICE */}
+          <div className="flex items-center gap-1 text-primary font-semibold text-sm">
+            <DollarSignIcon className="size-4" />
+            {price}
+          </div>
         </div>
       </div>
     </Link>
