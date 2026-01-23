@@ -4,9 +4,18 @@ import {
   TypeIcon,
   FileTextIcon,
   SaveIcon,
+  DollarSignIcon,
 } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
+
+type ProductFormState = {
+  title: string;
+  description: string;
+  imageUrl: string;
+  price: number | "";
+  status: "public" | "private";
+};
 
 function EditProductForm({
   product,
@@ -18,6 +27,8 @@ function EditProductForm({
     title: string;
     description: string;
     imageUrl: string;
+    priceInCents: number;
+    status: "public" | "private";
   };
   isPending: boolean;
   isError: boolean;
@@ -25,12 +36,16 @@ function EditProductForm({
     title: string;
     description: string;
     imageUrl: string;
+    price: number | "";
+    status: "public" | "private";
   }) => void;
 }) {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ProductFormState>({
     title: product.title,
     description: product.description,
     imageUrl: product.imageUrl,
+    price: product.priceInCents,
+    status: product.status,
   });
 
   return (
@@ -65,6 +80,44 @@ function EditProductForm({
                 }
                 required
               />
+            </label>
+
+            {/* PRICE */}
+            <label className="input input-bordered flex items-center gap-2 bg-base-200">
+              <DollarSignIcon className="size-4 text-base-content/50" />
+              <input
+                type="number"
+                step="0.01"
+                min="0"
+                placeholder="19.99"
+                className="grow"
+                value={formData.price}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    price: e.target.value === "" ? "" : Number(e.target.value),
+                  })
+                }
+                required
+              />
+            </label>
+
+            {/* STATUS */}
+            <label className="input input-bordered flex items-center gap-2 bg-base-200">
+              <span className="text-sm text-base-content/60">Status</span>
+              <select
+                className="grow bg-transparent"
+                value={formData.status}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    status: e.target.value as ProductFormState["status"],
+                  })
+                }
+              >
+                <option value="public">Public</option>
+                <option value="private">Private</option>
+              </select>
             </label>
 
             <label className="input input-bordered flex items-center gap-2 bg-base-200">
