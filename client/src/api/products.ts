@@ -4,15 +4,21 @@ export const createProduct = async ({
   title,
   description,
   imageUrl,
+  price,
+  status,
 }: {
   title: string;
   description: string;
   imageUrl: string;
+  price: number;
+  status: "public" | "private";
 }) => {
   const response = await axiosInstance.post("/products", {
     title,
     description,
     imageUrl,
+    price,
+    status,
   });
   return response.data;
 };

@@ -6,25 +6,46 @@ import {
   ImageIcon,
   SparklesIcon,
   TypeIcon,
+  DollarSignIcon,
 } from "lucide-react";
 import { useCreateProduct } from "../hooks/useProducts";
+
+type ProductFormState = {
+  title: string;
+  description: string;
+  imageUrl: string;
+  price: number | "";
+  status: "public" | "private";
+};
 
 function CreatePage() {
   const navigate = useNavigate();
   const createProductMutation = useCreateProduct();
-  const [formData, setFormData] = useState({
+
+  const [formData, setFormData] = useState<ProductFormState>({
     title: "",
     description: "",
     imageUrl: "",
+    price: "",
+    status: "public",
   });
+
+  const isFormValid =
+    formData.title.trim() && formData.price !== "" && formData.price > 0;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    createProductMutation.mutate(formData, {
-      onSuccess: () => {
-        navigate("/");
+    if (!isFormValid) return;
+
+    createProductMutation.mutate(
+      {
+        ...formData,
+        price: Number(formData.price),
       },
-    });
+      {
+        onSuccess: () => navigate("/"),
+      },
+    );
   };
 
   return (
@@ -41,7 +62,7 @@ function CreatePage() {
           </h1>
 
           <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-            {/* TITLE INPUT */}
+            {/* TITLE */}
             <label className="input input-bordered flex items-center gap-2 bg-base-200">
               <TypeIcon className="size-4 text-base-content/50" />
               <input
@@ -56,7 +77,46 @@ function CreatePage() {
               />
             </label>
 
-            {/* IMGURL INPUT */}
+            {/* PRICE */}
+            <label className="input input-bordered flex items-center gap-2 bg-base-200">
+              <DollarSignIcon className="size-4 text-base-content/50" />
+              <input
+                type="number"
+                step="0.01"
+                min="0"
+                placeholder="19.99"
+                className="grow"
+                value={formData.price}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    price: e.target.value === "" ? "" : Number(e.target.value),
+                  })
+                }
+                required
+              />
+            </label>
+
+            {/* STATUS */}
+            <label className="input input-bordered flex items-center gap-2 bg-base-200">
+              <span className="text-sm text-base-content/60">Status</span>
+              <select
+                className="grow bg-transparent"
+                value={formData.status}
+                disabled={createProductMutation.isPending}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    status: e.target.value as ProductFormState["status"],
+                  })
+                }
+              >
+                <option value="public">Public</option>
+                <option value="private">Private</option>
+              </select>
+            </label>
+
+            {/* IMAGE URL */}
             <label className="input input-bordered flex items-center gap-2 bg-base-200">
               <ImageIcon className="size-4 text-base-content/50" />
               <input
@@ -71,9 +131,9 @@ function CreatePage() {
               />
             </label>
 
-            {/* IMG PREVIEW */}
+            {/* IMAGE PREVIEW */}
             {formData.imageUrl && (
-              <div className="rounded-box overflow-hidden">
+              <div className="rounded-box overflow-hidden border border-base-300">
                 <img
                   src={formData.imageUrl}
                   alt="Preview"
@@ -82,6 +142,7 @@ function CreatePage() {
               </div>
             )}
 
+            {/* DESCRIPTION */}
             <div className="form-control">
               <div className="flex items-start gap-2 p-3 rounded-box bg-base-200 border border-base-300">
                 <FileTextIcon className="size-4 text-base-content/50 mt-1" />
@@ -90,7 +151,10 @@ function CreatePage() {
                   className="grow bg-transparent resize-none focus:outline-none min-h-24"
                   value={formData.description}
                   onChange={(e) =>
-                    setFormData({ ...formData, description: e.target.value })
+                    setFormData({
+                      ...formData,
+                      description: e.target.value,
+                    })
                   }
                   required
                 />
@@ -99,14 +163,14 @@ function CreatePage() {
 
             {createProductMutation.isError && (
               <div role="alert" className="alert alert-error alert-sm">
-                <span>Failed to create. Try again.</span>
+                <span>Failed to create product. Try again.</span>
               </div>
             )}
 
             <button
               type="submit"
               className="btn btn-primary w-full"
-              disabled={createProductMutation.isPending}
+              disabled={!isFormValid || createProductMutation.isPending}
             >
               {createProductMutation.isPending ? (
                 <span className="loading loading-spinner" />
@@ -120,4 +184,5 @@ function CreatePage() {
     </div>
   );
 }
+
 export default CreatePage;
