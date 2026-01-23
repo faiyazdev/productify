@@ -27,7 +27,7 @@ function App() {
                 <main className="max-w-6xl mx-auto px-4 py-6">
                   <Routes>
                     <Route index element={<DashboardPage />} />
-                    <Route path="/products" element={<DashboardProducts />} />
+                    <Route path="products" element={<DashboardProducts />} />
                     {/* Add more dashboard sub-routes here */}
                   </Routes>
                 </main>
