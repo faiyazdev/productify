@@ -13,6 +13,7 @@ import { useParams, Link, useNavigate } from "react-router";
 import { useDeleteProduct, useProduct } from "../hooks/useProducts";
 import LoadingSpinner from "../components/LoadingSpinner";
 import CommentsSection from "../components/CommentSection";
+import { formatCurrency } from "../lib/formatter";
 
 function ProductDetailsPage() {
   const { id } = useParams();
@@ -93,7 +94,7 @@ function ProductDetailsPage() {
             <div className="flex flex-wrap items-center gap-4 mt-1">
               <div className="flex items-center gap-1 text-lg font-semibold text-primary">
                 <DollarSignIcon className="size-5" />
-                {product.priceInCents}
+                {formatCurrency(product.priceInCents / 100)}
               </div>
 
               <span
