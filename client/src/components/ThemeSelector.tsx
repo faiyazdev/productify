@@ -1,47 +1,14 @@
 import { useEffect, useState } from "react";
 import { PaletteIcon } from "lucide-react";
 
-const THEMES = [
-  "light",
-  "dark",
-  "cupcake",
-  "bumblebee",
-  "emerald",
-  "corporate",
-  "synthwave",
-  "retro",
-  "cyberpunk",
-  "valentine",
-  "halloween",
-  "garden",
-  "forest",
-  "aqua",
-  "lofi",
-  "pastel",
-  "fantasy",
-  "wireframe",
-  "black",
-  "luxury",
-  "dracula",
-  "cmyk",
-  "autumn",
-  "business",
-  "acid",
-  "lemonade",
-  "night",
-  "coffee",
-  "winter",
-  "dim",
-  "nord",
-  "sunset",
-];
+const THEMES = ["dark"];
 
 function ThemeSelector() {
   const [theme, setTheme] = useState(() => {
     if (typeof window !== "undefined") {
-      return localStorage.getItem("theme") || "forest";
+      return localStorage.getItem("theme") || "dark";
     }
-    return "forest";
+    return "dark";
   });
 
   useEffect(() => {
